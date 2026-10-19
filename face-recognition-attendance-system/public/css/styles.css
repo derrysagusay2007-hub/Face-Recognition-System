@@ -1,0 +1,403 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    margin-bottom: 5px;
+}
+
+#status {
+    color: #00ffcc;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.main-container {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+#video-container {
+    position: relative;
+    width: 640px;
+    height: 480px;
+    border: 2px solid #00ffcc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+video {
+    width: 640px;
+    height: 480px;
+    transform: scaleX(-1);
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.attendance-panel {
+    background-color: #1e1e1e;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.attendance-panel h2 {
+    margin-top: 0;
+    color: #00ffcc;
+}
+
+.stats-box {
+    background: #2a2a2a;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+    border: 1px solid #444;
+}
+
+.stats-box span {
+    color: #00ffcc;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.admin-section {
+    background: #252525;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px dashed #00ffcc;
+}
+
+.admin-section h4 {
+    margin: 0 0 8px 0;
+    color: #ffcc00;
+    font-size: 14px;
+}
+
+.admin-section select,
+.admin-section button {
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: none;
+    font-weight: bold;
+}
+
+.admin-section select {
+    background: #333;
+    color: #fff;
+}
+
+.admin-section button {
+    background-color: #ffcc00;
+    color: #121212;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #333;
+}
+
+th {
+    color: #888;
+}
+
+#notification {
+    position: fixed;
+    top: 20px;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: bold;
+    display: none;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s ease;
+}
+
+#liveness-status {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffcc00;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 10;
+    border: 1px solid #ffcc00;
+    display: none;
+}
+
+/* Manual Registration Button */
+.manual-register-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #ff4444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 20;
+    transition: background-color 0.3s ease;
+}
+
+.manual-register-btn:hover {
+    background-color: #ff6666;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 15px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #00ffcc;
+    font-size: 20px;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #00ffcc;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-body p {
+    margin: 0;
+    color: #ddd;
+    font-size: 14px;
+}
+
+#studentName {
+    padding: 10px;
+    background-color: #2a2a2a;
+    border: 1px solid #00ffcc;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+#studentName:focus {
+    outline: none;
+    border-color: #00ff88;
+    box-shadow: 0 0 8px rgba(0, 255, 136, 0.3);
+}
+
+.register-btn,
+.cancel-btn {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.register-btn {
+    background-color: #00ff88;
+    color: #121212;
+}
+
+.register-btn:hover {
+    background-color: #00ffcc;
+    transform: translateY(-2px);
+}
+
+.register-btn:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.cancel-btn {
+    background-color: #444;
+    color: #fff;
+}
+
+.cancel-btn:hover {
+    background-color: #555;
+}
+
+/* Signature Pad Styles */
+.registration-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.step-title {
+    margin: 0;
+    color: #00ffcc;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.step-subtitle {
+    margin: 0;
+    color: #aaa;
+    font-size: 13px;
+}
+
+.signature-container {
+    border: 2px solid #00ffcc;
+    border-radius: 4px;
+    background-color: #0a0a0a;
+    overflow: hidden;
+}
+
+#signaturePad {
+    display: block;
+    width: 100%;
+    height: 200px;
+    cursor: crosshair;
+    touch-action: none;
+    background-color: #0a0a0a;
+}
+
+.signature-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.secondary-btn {
+    flex: 1;
+    padding: 8px;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s ease;
+}
+
+.secondary-btn:hover {
+    background-color: #555;
+}
+
+.secondary-btn:active {
+    transform: translateY(1px);
+}
+
+/* Update modal max-width for larger signature pad */
+#manualRegistrationModal .modal-content {
+    max-width: 500px;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 600px) {
+    #signaturePad {
+        height: 150px;
+    }
+    
+    .modal-content {
+        padding: 20px;
+    }
+}

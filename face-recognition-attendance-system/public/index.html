@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Recognition Attendance System</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js"></script>
+    <script defer src="js/app.js"></script>
+</head>
+<body>
+
+    <h1>Face Recognition Attendance System</h1>
+    <div id="status">Initializing system...</div>
+    <div id="notification"></div>
+
+    <!-- Manual Registration Modal -->
+    <div id="manualRegistrationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Manual Attendance Registration</h2>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="registration-steps">
+                    <!-- Step 1: Student Name -->
+                    <div class="step" id="step1">
+                        <p class="step-title">Step 1: Enter Your Name</p>
+                        <input type="text" id="studentName" placeholder="Enter your full name" maxlength="50">
+                        <button id="proceedToSignatureBtn" class="register-btn">Next: Sign Your Name</button>
+                        <button id="cancelFromStep1Btn" class="cancel-btn">Cancel</button>
+                    </div>
+
+                    <!-- Step 2: Signature -->
+                    <div class="step" id="step2" style="display: none;">
+                        <p class="step-title">Step 2: Sign Your Name</p>
+                        <p class="step-subtitle">Draw your signature in the box below</p>
+                        <div class="signature-container">
+                            <canvas id="signaturePad"></canvas>
+                        </div>
+                        <div class="signature-buttons">
+                            <button id="clearSignatureBtn" class="secondary-btn">Clear</button>
+                            <button id="undoSignatureBtn" class="secondary-btn">Undo</button>
+                        </div>
+                        <button id="captureAndRegisterBtn" class="register-btn">Capture Face & Register</button>
+                        <button id="cancelFromStep2Btn" class="cancel-btn">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div id="video-container">
+            <div id="liveness-status">👁️ Please Blink to Confirm</div>
+            <video id="webcam" autoplay muted playsinline></video>
+            <button id="manualRegisterBtn" class="manual-register-btn" style="display: none;">
+                🔴 Can't Recognize? Register Manually
+            </button>
+        </div>
+
+        <div class="attendance-panel">
+            <h2>Attendance Log</h2>
+
+            <div class="stats-box">
+                Present Today: <span id="total-count">0</span>
+            </div>
+
+            <div class="admin-section">
+                <h4>🛡️ Admin Override Tool</h4>
+                <select id="manualNameSelect">
+                    <option value="Derry">Derry</option>
+                </select>
+                <button id="manualOverrideBtn">Force Check-In</button>
+            </div>
+
+            <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+                <button id="exportBtn">Export CSV</button>
+                <button id="clearBtn">Clear Log</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody id="attendance-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

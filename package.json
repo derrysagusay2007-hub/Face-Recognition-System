@@ -1,0 +1,18 @@
+{
+  "name": "face-recognition-attendance",
+  "version": "1.0.0",
+  "description": "Face Recognition Attendance System",
+  "main": "node.js",
+  "scripts": {
+    "start": "node node.js",
+    "dev": "nodemon node.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.0.1"
+  }
+}
